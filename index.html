@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Poppins:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    section{
+        font-family: 'Poppins';
+        overflow-y: scroll; 
+        border: 5px solid darkturquoise;
+        border-radius: 20px;
+        margin: auto;
+        text-align: center;
+        width: 250px;
+        height: 250px;
+        background-color: steelblue;
+    }
+    section::-webkit-scrollbar{
+      overflow: hidden;
+    }
+
+</style>
+<body>
+    <section>
+      <h4>OMOLOLA'S CLOCK</h4>
+      <div id="t">
+        <span id="hr"></span>
+        <span id="min"></span>
+        <span id="sec"></span>
+      </div>
+      <h3>ALARM</h3>
+      <div>
+       <span id=""><label for="">Hr</label>
+         <select name="" id="sethr">
+            
+         </select>
+       </span>  
+       <span id=""> <label for="">MIN</label>
+        <select name="" id="setmin"></select>
+       </span>
+       <span id=""> <label for="">SEC</label>
+        <select name="" id="setsec"></select>
+       </span>
+      </div>
+<option value=""></option>
+<button onclick="setalarm()">SET ALARM</button>
+<h5 id="screen"></h5>
+<audio src="Alarm-ringtone.mp3" id="alarm"></audio>
+    </section>
+    
+</body>
+</html>
+<script>
+    let hr = document.getElementById("hr")
+    let min = document.getElementById("min")
+    let sec = document.getElementById("sec")
+    let sethr = document.getElementById("sethr")
+    let setmin = document.getElementById("setmin")
+    let setsec = document.getElementById("setsec")
+  let screen = document.getElementById("screen")
+  let alarm = document.getElementById("alarm")
+   setInterval(() => {
+    let t = new Date()
+    hr.innerHTML = t.getHours() + ":"
+    min.innerHTML = t.getMinutes() + ":"
+    sec.innerHTML = t.getSeconds()
+
+   }, 1000);
+    for (let index = 0; index < 24; index++) {
+        sethr.innerHTML += `<option value="${index}">${index}</option>`
+        
+    }
+    for (let index = 0; index < 60; index++) {
+        setmin.innerHTML += `<option value="${index}">${index}</option>`
+        
+    }
+    for (let index = 0; index < 60; index++) {
+        setsec.innerHTML += `<option value="${index}">${index}</option>`
+        
+    }
+    function setalarm(){
+        screen.innerHTML = `<p>Alarm Set</p>`
+    }
+    setInterval(() => {
+        t = new Date()
+        if (t.getHours() == sethr.value && t.getMinutes() == setmin.value && t.getSeconds() == setsec.value) {
+            screen.innerHTML = "Alarm Ringing"
+           alarm.play() 
+        }
+    }, 1000);
+</script>
